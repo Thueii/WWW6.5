@@ -10,7 +10,7 @@ contract Ownable{
 
     }
     
-    modifier onlyOwner(){
+    modifier onlyOwner() virtual{
         require(msg.sender == owner, "Access denied: Only the owner can perform this action");
         _;
     }
@@ -19,7 +19,7 @@ contract Ownable{
      return owner;
    }
 
-   function transferOwnership(address _newOwner) public onlyOwner{
+   function transferOwnership(address _newOwner) virtual public onlyOwner {
      require(_newOwner != address(0), "Invalid address: New owner cannot be the zero address");
      address previous = owner;
      owner = _newOwner;

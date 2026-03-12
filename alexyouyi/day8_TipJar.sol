@@ -1,7 +1,9 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract TipJar{
+import "./day11_Ownable.sol";
+
+contract TipJar is Ownable{
     address public owner;
     string[] public supportedCurrencies;
     mapping(string => uint256) conversionRates;
@@ -9,7 +11,7 @@ contract TipJar{
     mapping(address => uint256) public tipsPerPerson;
     mapping(string => uint256) public tipsPerCurrency;
 
-    modifier onlyOwner() {
+    modifier onlyOwner() override{
         require(msg.sender == owner, "Only owner can do this");
         _;
     }
@@ -70,7 +72,7 @@ contract TipJar{
         totalTipsReceived = 0;
     }
 
-    function tranferOwnership(address _newOwner)public onlyOwner{
+    function transferOwnership(address _newOwner)public onlyOwner override{
         require(_newOwner!=address(0),"Invalid address");
         owner = _newOwner;
     }
